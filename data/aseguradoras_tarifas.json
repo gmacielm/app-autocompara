@@ -1,0 +1,12 @@
+[  
+	{ "name":"ABA", "image":"images/logo-aba.png", "porcentaje":".066"},
+	{ "name":"AIG", "image":"images/logo-aig.png", "porcentaje":".065"},
+	{ "name":"ATLAS", "image":"images/logo-atlas.png","porcentaje":".060"},
+	{ "name":"AXA", "image":"images/logo-axa.png", "porcentaje":".068"},
+	{ "name":"GNP", "image":"images/logo-gnp.png", "porcentaje":".051"},
+	{ "name":"HDI", "image":"images/logo-hdi.png","porcentaje":".05"},
+	{ "name":"INBURSA", "image":"images/logo-inbursa.png", "porcentaje":".055"},
+	{ "name":"MAPFRE", "image":"images/logo-mapfre.png","porcentaje":".052"},
+	{ "name":"QUALITAS", "image":"images/logo-qualitas.png", "porcentaje":".073"}
+]
+	

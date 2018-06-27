@@ -1,0 +1,71 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+  <link rel="import" href="../bower_components/iron-form/iron-form.html">
+
+  <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+  <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+  <link rel="import" href="../bower_components/paper-item/paper-item.html">
+  <link rel="import" href="../bower_components/paper-button/paper-button.html">  
+  
+  <link rel="import" href="../bower_components/neon-animation/web-animations.html">
+  <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">  
+
+<dom-module id="ce-category-data">
+	<template>	    
+	 	<paper-dropdown-menu attr-for-selected="value" selected="{{selection}}" required label="Tipo de Vehiculo" name="tipo" id="menu_tipo">		 
+		 <paper-listbox class="dropdown-content" slot="dropdown-content">		   
+		   <dom-repeat items="{{categories}}" as="tipo">
+			  <template>	   
+				<paper-item value="[[tipo.name]]">[[tipo.title]]</paper-item>											
+			  </template>
+			</dom-repeat>	
+		   </paper-listbox>		  
+	      </paper-dropdown-menu>		
+	</template>
+	
+  <script> 
+
+    class CeCategoryData extends Polymer.Element {
+
+      static get is() { return 'ce-category-data'; }
+	  	 
+      static get properties() { 
+		return {        	  	  	 
+			categories: {
+			  type: Array,
+			        value(){
+					 return [
+						{ name: 'autos', title: 'AUTOS'},
+						{ name: 'pick-ups', title: 'PICKUPS'},
+						{ name: 'legalizado',title: 'LEGALIZADO'},
+						{ name: 'fronterizo', title: 'FRONTERIZO'},
+					  ];
+					},
+				notify: true,	
+			    reflectToAttribute: true,
+			},	
+			
+			selection: {
+			   type: String 			   
+			  }
+            		
+		};
+     
+	 }
+	  
+   } 	 	  	 
+	
+  customElements.define(CeCategoryData.is, CeCategoryData);
+  </script>
+
+</dom-module>

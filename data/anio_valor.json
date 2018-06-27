@@ -1,0 +1,58 @@
+[
+  {				
+    "codigo_modelo":"honda0101",
+	"anios":[
+		{ "anio":"2016", "precio":"325000" },  
+		{ "anio":"2017", "precio":"355000" }  
+		    ]           
+   },
+  {
+    "codigo_modelo":"honda0102",
+	"anios":[
+				{ "anio":"2016",  "precio":"375000" },  
+				{ "anio":"2017",  "precio":"395000" }  
+		    ]           
+	},
+	{
+    "codigo_modelo":"honda0105",
+	"anios":[
+				{ "anio":"2016",  "precio":"231000" },  
+				{ "anio":"2017",  "precio":"236000" }  
+		    ]           
+	},
+   {
+    "codigo_modelo":"honda0106",
+	"anios":[
+				{ "anio":"2016",  "precio":"22000" },  
+				{ "anio":"2017",  "precio":"22500" }  
+		    ]           
+	},	
+   {
+    "codigo_modelo":"honda0108",
+	"anios":[
+				{ "anio":"2016",  "precio":"333000" },  
+				{ "anio":"2017",  "precio":"363000" }  
+		    ]           
+	},	
+	{
+    "codigo_modelo":"honda0110",
+	"anios":[
+				{ "anio":"2016",  "precio":"283000" },  
+				{ "anio":"2017",  "precio":"303000" }  
+		    ]           
+	},		
+	{
+    "codigo_modelo":"honda0118",
+	"anios":[
+				{ "anio":"2016",  "precio":"197000" },  
+				{ "anio":"2017",  "precio":"199000" }  
+		    ]           
+	},	
+	{
+    "codigo_modelo":"honda0119",
+	"anios":[
+				{ "anio":"2016",  "precio":"212000" },  
+				{ "anio":"2017",  "precio":"215000" }  
+		    ]           
+	}	
+]

@@ -1,0 +1,229 @@
+  <link rel="import" href="../bower_components/polymer/polymer-element.html">
+  
+  <link rel="import" href="../bower_components/iron-form/iron-form.html">
+
+  <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+  <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+  <link rel="import" href="../bower_components/paper-item/paper-item.html">
+  <link rel="import" href="../bower_components/paper-button/paper-button.html">  
+  
+  <link rel="import" href="../bower_components/neon-animation/web-animations.html">
+  <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+  
+  <link rel="import" href="ce-aseguras.html">
+  <link rel="import" href="ce-category-data.html">
+  <link rel="import" href="shared-styles.html">
+
+-- <dom-module id="ce-cotiza">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+	  
+	  
+	  <style>
+	  .card {
+	    border: 1px solid green;
+		height: 780px;
+	  }
+	  .siniestra, .aseguradoras, .formulario, .centrale {
+	    border-style: solid;
+	  }
+	  
+	  .siniestra{
+		float:left;
+		width: 50%;	
+		height: 100%;
+	  }
+	  
+	  .centrale{
+		width: 4%;
+		float:left;
+		border-style: solid;
+	  }
+	  
+	  .diestra{
+		width: 46%;
+		float:right;
+	  }
+	  	 	 
+      .banner{
+	    padding:8px 0px 0px 0px; 
+        background-color: #ffffff;  
+	    width: auto; 
+		border: 1px solid #999999; 			
+	    } 
+		
+		
+	   .marco {
+	     text-align: center;
+		 height: 90%;
+	    }
+		
+	   #banner1 {
+		 width: 98%;
+		 display: inline;
+		 vertical-align: center;		 
+		}
+		
+	   #linea-roja{
+	     background-color: #FF0000;
+		 height: 7px;
+		 width: auto;
+	   }
+	   
+	   #linea-gris{
+	     background-color: #F1EAE2;
+		 height: 25px;
+		 width: auto;
+	   }
+	   
+	   .aseguradoras{
+	     padding:0px 0px 0px 0px; 
+		 height:400px;
+		 width:605px;
+		 border: 1px solid red; 		 
+	    }
+		
+		h3 {
+		 font-size:24px;
+		 font-weight:bold;
+		 color:black;
+		 padding:0px 0px 0px 0px; 
+		 margin: 0px 0px 0px 0px;
+		 background-image: url("/images/pleca_div.jpg");
+		 background-repeat: no-repeat;
+		 background-position: left bottom;
+		}
+		
+		#formulario{
+		 background-color:#F1EAE2;
+		 height: 620px;
+		 width: auto;
+		 color: #6C5F56;
+		 border: 1px solid #CDC9C6;
+		} 
+		
+		
+		#boton-cotizar {
+  		  height: 80%;  
+		}
+		
+		#obligatorios{
+		  width: 50%;
+		  float: left;	
+		  border: 1px solid red; 		
+		}
+		
+		#boton {
+		  width: 40%;
+		  float: right;
+		  border: 1px solid red;
+		}
+		
+		.mandatorios{
+		  color: #FF0000;
+		  font-size: 18px;
+		  font-weight: 700;
+		  font-family: Helvetica, Arial, sans-serif;
+		  padding: 10px, 0px;
+		  margin:  10px, 0px;;		  
+		}
+		
+		.aclaracion{
+		  color: #333333;
+		  font-size: 15px;
+		  font-weight: 400;
+		  font-family: Helvetica, Arial, sans-serif;		  
+		}			
+    </style>
+	
+	 <div class="card">          
+	  <div class="siniestra">
+	    <div class="banner">
+		  <div class="marco">
+		     <img id="banner1" src="/images/familia-cotiza.png"/>
+		  </div>
+		  <div id="linea-roja"></div>
+		  <div id="linea-gris"></div>
+	    </div>
+	    
+		<div class="aseguradoras">
+			<h3>Aseguradoras</h3>			
+		   <ce-aseguras></ce-aseguras>
+		</div>		
+	  </div>	
+	  <div class"centrale"></div>
+	  <div class="diestra">
+	   <div id="formulario">
+	   <h3 class=" ">Cotiza el seguro de tu auto en menos de 1 minuto </h3>	   
+		 <!-- <iron-form id="formita"> 
+		   <form action="/foo" method="post">
+			<ce-category-data></ce-category-data>
+		    <br><br>
+			<paper-button raised onclick="submitForm()">Cotizar</paper-button>
+			<paper-button raised onclick="formita.submit()">Cotizar</paper-button>
+		  <br>
+		  <div class="output"></div>	-->	  
+		   <iron-form id="form1">
+				<form action="/foo" method="get">
+				<paper-input type="text" name="name" required label="Name" value="Batman"></paper-input>
+				<input name="foo" required>
+				<input type="checkbox" name="donuts" checked>I like donuts<br>
+				<paper-checkbox name="food" value="pizza" checked>pizza</paper-checkbox><br>
+				<paper-checkbox name="food" value="cheese" required>cheese</paper-checkbox>
+				<br>
+				<paper-dropdown-menu label="Cars" name="cars" required>
+				  <paper-listbox class="dropdown-content" slot="dropdown-content">
+					<paper-item value="volvo">Volvo</paper-item>
+					<paper-item value="saab">Saab</paper-item>
+					<paper-item value="fiat">Fiat</paper-item>
+					<paper-item value="audi">Audi</paper-item>
+				  </paper-listbox>
+				</paper-dropdown-menu>
+				<br><br>
+				<paper-button raised onclick="form1.submit()">Submit</paper-button>
+				<paper-button raised onclick="form1.reset()">Reset</paper-button>
+				<paper-button raised onclick="form1.validate()">Validate</paper-button>
+			  </form>
+			  <br>
+			  <div class="output"></div>
+			</iron-form>
+	   </div> 
+	   <div id="boton-cotizar">
+			<div id="obligatorios">
+				<p class="mandatorios">*Campos Obligatorios </p>
+				<p class="aclaracion">Solo aseguramos autos de uso particular y personas fisicas.</p>
+			</div>
+			<!--<div id="boton"><button onclick="submitForm()">Cotiza</button></div>		  -->
+	   </div>	
+	   </form>
+	</iron-form>			   
+    </div>
+  <!-- </template>
+
+  <script>
+    class CeCotiza extends Polymer.Element {
+      static get is() { return 'ce-cotiza'; }
+	  	  
+    	constructor() {
+        super();
+      }
+	   
+    }
+
+	
+    window.customElements.define(CeCotiza.is, CeCotiza);
+	
+   function submitForm() {       
+      //  document.getElementById('formita').submit();
+	  //console.log(document.getElementsByTagName("iron-form")[0].innerHTML);
+	 // console.log(document.getElementsByTagName("iron-form").length);
+	 // console.log(document.getElementById('formita').length);
+	//	this.$.formita.submit();
+      }
+  </script>
+<!</dom-module> -->
+

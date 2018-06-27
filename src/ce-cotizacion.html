@@ -1,0 +1,176 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-resizable-behavior/iron-resizable-behavior.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../bower_components/iron-menu-behavior/iron-menu-behavior.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selectable.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tab.html">
+<link rel="import" href="../bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="../bower_components/paper-behaviors/paper-button-behavior.html">
+<link rel="import" href="../bower_components/paper-behaviors/paper-inky-focus-behavior.html">
+<link rel="import" href="../bower_components/paper-behaviors/paper-ripple-behavior.html">
+
+<dom-module id="ce-cotizacion">
+
+  <template>  
+      <style>
+		 .paginas { 
+				display: none; 
+			}
+		 
+		 .iron-selected { 
+			display: block; 
+			}
+	  </style>
+        <p>El periodo:[[periodo]]</p>
+        <p>El codigo:[[codigo_modelo]]</p>
+		<p>El modelo:[[modelo]]</p>
+		<p>El anio:[[anio]]</p>
+		<p>El precio:[[precio]]</p>
+		<p>La cobertura:[[cobertura]]</p>
+		
+		<template is="dom-repeat" items="{{primas}}">
+                <paper-tab name$="{{item}}">{{item.name}}-- {{item.prima}} -- {{item.image}}</paper-tab>
+         </template>
+			
+		<paper-tabs id="tableta" selected="{{periodo}}">
+			  <template is="dom-repeat" items="{{periodos}}">
+                <paper-tab name$="{{item}}">{{item.name}}</paper-tab>
+              </template>
+		</paper-tabs>
+		
+        
+		<iron-pages id="paginas" selected="[[periodo]]">
+		  <div class="paginas">Page 1</div>
+		  <div class="paginas">Page 2</div>
+		  <div class="paginas">Page 3</div>		  
+		  <div class="paginas">Page 4</div>		  
+		</iron-pages>  
+	
+  </template>
+
+  <script>
+  
+   class CeCotizacion extends Polymer.Element {
+
+      static get is() { return 'ce-cotizacion'; }
+	  	 
+      static get properties() { 
+	  return {
+	    periodo:{		
+          type: Number,		
+		  value: 0,		  		
+		  reflectToAttribute: true,
+		  notify : true,		 
+		},
+		modelo:{		
+          type: String,         
+		  reflectToAttribute: true,
+		  notify : true,		 
+		},
+		codigo_modelo:{		
+          type: String,         
+		  reflectToAttribute: true,
+		  notify : true,		 
+		},
+		anio:{		
+          type: String,         
+		  reflectToAttribute: true,
+		  notify : true,		 
+		},
+		 precio:{		
+          type: Number,         
+		  reflectToAttribute: true,
+		  notify : true,		 
+		},
+		 cobertura:{		
+          type: Number,  		  
+		  value: 1,
+		  reflectToAttribute: true,
+		  notify : true,		 
+		},		
+		 tarifas:{		
+          type: Array,  
+		  value() {
+              return [                
+				];
+             },			  		 
+		 reflectToAttribute: true,
+		 notify : true		 
+		},
+		 primas:{		
+         type: Array,  
+		 computed: 'calculaPrima(precio, periodo, cobertura, tarifas)',
+		 reflectToAttribute: true,
+		 notify : true		 
+		},
+		periodos: {
+          type: Array,
+          value: function() {
+            return [ {"name":"Anual",      "valor":"1" }, 
+					 {"name":"Semestral",  "valor":"2" }, 
+					 {"name":"Trimestral", "valor":"4" }, 
+					 {"name":"Mensual",    "valor":"12"}
+					];
+           }
+        }		
+	   };
+	}	 
+	  
+	   calculaPrima(precio, periodo, cobertura, tarifas){							
+			var arreglo=new Array();
+			var meses=0;		
+			
+			switch (periodo) {
+				case 0:
+					meses = 1;
+					break;
+				case 1:
+					meses = 2;
+					break;
+				case 2:
+					meses = 4;
+					break;
+				case 3:
+					meses = 12;
+			}			
+				
+					for (var i in tarifas) { 
+					     var cadena = '';
+						 var prima  = 0;
+						 var limitada = 1;												
+						
+						if(cobertura==2) {limitada = 2; }
+						prima = ((parseInt(precio) * parseFloat(0+tarifas[i].porcentaje))/ limitada) /meses;
+						//arreglo.push({name: tarifas[i].name, prima: prima.toPrecision(2)});						
+						
+						arreglo.push({name: tarifas[i].name, prima: prima, image: tarifas[i].image});												
+					}
+				 
+			return arreglo.reverse();						
+	  
+			}
+			
+	/*	ready() {
+			super.ready();	
+			this.periodo=0;
+		}*/
+	   			
+} // class 	
+  
+  customElements.define(CeCotizacion.is, CeCotizacion);
+  </script>
+  
+</dom-module>
+

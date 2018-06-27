@@ -1,0 +1,199 @@
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+
+
+
+
+
+<!-- Define element -->
+<polymer-element name="my-counter" attributes="counter">
+  <template>
+    <br><br>
+    Usecase: user picks color and nuance for t-shirt.
+    <br><br>
+    DB is 3 tables:
+    tbl.color [in m:n relation with] tbl.nuance.
+    <br>Middle tbl.color_nuance keeps the selected value by the user.
+    <br><br>
+    
+    
+    
+    
+    <hr>
+    <br>
+    Testing:
+    <br><br>
+    <!-- {{color_list}} -->
+    <br>
+    <!-- {{color_list.color[0].c_name}} -->
+    <br>
+    Saved: 
+    id_color
+    {{saved_color_nuance_list.color_nuance[0].id_color}}
+    <br><br>
+    id_nuance
+    {{saved_color_nuance_list.color_nuance[0].id_nuance}}
+    <br><br>
+    Current: 
+    <br><br>
+    current_id_color = {{current_id_color}}
+    <br><br>
+    current_id_nuance = {{current_id_nuance}}
+    <br>
+    
+    <br><br><br>
+    <hr>
+    
+    Color:
+    <select 
+            id="color_dd" 
+            on-change="{{color_change}}"
+            >
+      <option value="" >Choose Color</option>
+      <template id="sector_dd_template" 
+                repeat="{{ color in color_list.color }}">
+                             
+           <option
+                    selected?="{{color.id_color == current_id_color}}"
+                    id="color_{{color.id_color}}" 
+                    value="{{color.id_color}}"       
+            >
+              {{color.c_name}}
+          </option>
+       </template>
+   </select>
+    
+    
+    <br><br><br>
+    
+    Nuance:
+    <select 
+            id="nuance_dd" 
+            on-change="{{nuance_change}}"
+            >
+      <option value="" >Choose Nuance</option>
+      <template id="sector_dd_template" 
+                repeat="{{ nuance in nuance_list.nuance }}">
+            <template if="{{nuance.id_color == current_id_color}}" >
+               <option
+                        selected?="{{nuance.id_nuance == current_id_nuance}}"
+                        id="color_{{nuance.id_nuance}}" 
+                        value="{{nuance.id_nuance}}"       
+                >
+                  {{nuance.n_name}}
+              </option>
+           </template>
+      </template>
+   </select>
+   
+    
+    
+  </template>
+  <script>
+    Polymer({
+      
+      ready: function() {
+         
+        /////////////////////////////////////////////////////////
+        //Get the data trough core-ajax(this is simulation)
+             var colors = '{"color":[' +
+                          '{"id_color":"1",   "c_name":"Red"},' +
+                          '{"id_color":"2",   "c_name":"Green"},' +
+                          '{"id_color":"3",   "c_name":"Blue"}]}';
+        
+        
+             var nuances ='{"nuance":[' +
+                          '{"id_nuance":"1", "id_color":"1", "n_name":"Fire"},' +
+                          '{"id_nuance":"2", "id_color":"1", "n_name":"Rose"},' +
+                          '{"id_nuance":"3", "id_color":"2", "n_name":"Leaf"},' +
+                          '{"id_nuance":"4", "id_color":"2", "n_name":"Grass"},' +
+                          '{"id_nuance":"5", "id_color":"3", "n_name":"Wather"},' +
+                          '{"id_nuance":"6", "id_color":"3", "n_name":"Ice"}]}';
+        
+           var saved_color_nuance = '{"color_nuance":[' +
+                                    '{"id_color":"3",   "id_nuance":"5"}]}';
+        /////////////////////////////////////////////////////////
+        
+        //set them as element properties:
+              var color_list = JSON.parse(colors);
+              //console.log(color_list);
+              this.color_list = color_list;
+        
+              var nuance_list = JSON.parse(nuances);
+              //console.log(color_list);
+              this.nuance_list = nuance_list;
+        
+              var saved_color_nuance_list = JSON.parse(saved_color_nuance);
+              //console.log(color_list);
+              this.saved_color_nuance_list = saved_color_nuance_list;
+        
+        /////////////////////////////////////////////////////////
+        
+        //current_color_nuance is curently selected nuance by the user.
+        //On init saved_color_nuance == current_color_nuance
+        this.current_id_color  = saved_color_nuance_list.color_nuance[0].id_color;
+        this.current_id_nuance = saved_color_nuance_list.color_nuance[0].id_nuance;
+        
+
+      
+      },
+      
+      color_change: function(e, detail, sender){
+           
+           console.log('color_change:');
+
+           //Get  selected color:
+            var current_id_color = sender.value;
+            console.log(current_id_color);
+            this.current_id_color = current_id_color;
+          
+         ////////////////////////////////////////////////////////////////
+         //When sector is changed the FIRST id_nuance should appear for the id_color
+            var nuance_list = this.nuance_list.nuance;
+           
+            var arrayLength = nuance_list.length;
+            for (var i = 0; i < arrayLength; i++) {
+
+              if (nuance_list[i].id_color == current_id_color) 
+                { 
+                    var current_id_nuance = nuance_list[i].id_nuance;
+                    break;
+                }
+            }
+            
+           this.current_id_nuance = current_id_nuance;// the FIRST id_nuance
+           /////////////////////////////////////
+        
+        
+           //Here:
+           //Make AJAX call to save selected values for id_nuance and id_color
+           //... in tbl.saved_color_nuance
+          
+          
+        },
+      
+      nuance_change: function(e, detail, sender){
+           
+        
+           console.log('nuance_change:');
+
+           //Get  selected nuance:
+            var current_id_nuance = sender.value;
+            console.log(current_id_nuance);
+            this.current_id_nuance = current_id_nuance;
+          
+           //Here:
+           //Make AJAX call to save selected values for id_nuance and id_color
+           //... in tbl.saved_color_nuance
+          
+          
+        },
+      
+      
+    });
+  </script>
+</polymer-element>
+
+<!-- Use element -->
+<my-counter>Points</my-counter>

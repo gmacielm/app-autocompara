@@ -1,0 +1,144 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+
+  <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+  <link rel="import" href="../bower_components/iron-form/iron-form.html">
+
+  <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+  <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+  <link rel="import" href="../bower_components/paper-item/paper-item.html">
+  <link rel="import" href="../bower_components/paper-button/paper-button.html">  
+  
+  <link rel="import" href="../bower_components/neon-animation/web-animations.html">
+  <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+  
+  <link rel="import" href="ce-anios-data.html">
+  <link rel="import" href="ce-modelos-data.html">
+  <link rel="import" href="my-view2.html">
+
+<dom-module id="ce-marca-data">
+	<template>	
+			
+			
+	 	<paper-dropdown-menu id="menu" required label="Marca" name="marca">
+		 <paper-listbox class="dropdown-content" slot="dropdown-content">		   
+		   <dom-repeat items="{{marcas}}" as="marca">
+			  <template>	  				
+				<paper-item id_marca="[[marca.name]]" value="[[marca.name]]">[[marca.title]]</paper-item>											
+			  </template>
+		    </dom-repeat>	
+		   </paper-listbox>		  
+	      </paper-dropdown-menu>	        		  
+		  <br/>		  		  
+		  <br/>		  
+		  
+		  <ce-anios-data anio_inicio="{{anio_inicio}}" anio_fin="{{anio_fin}}" selected="{{selected}}"></ce-anios-data>		  
+		  <br/>
+		  <br/>
+		  
+		  <ce-modelos-data modelos="{{modelos}}"></ce-modelos-data>		  
+		  <br/>
+		  <br/>
+	</template>
+	
+  <script> 
+
+    class CeMarcaData extends Polymer.Element {
+
+      static get is() { return 'ce-marca-data'; }
+	  	 
+      static get properties() { 
+	  return {    
+				anio_inicio:{
+					type: Number,
+					//value: 1996,
+					notify: true,
+					reflectToAttribute: true,
+				},		
+				anio_fin:{
+					type: Number,
+					//value: 2018,
+					notify: true,
+					reflectToAttribute: true,
+				},	
+				marcas: {
+					type: Array,
+					value(){
+					return [ ];		  
+					},
+					notify: true,
+					reflectToAttribute: true,
+				},	
+				modelos: {
+					type: Array,
+					value(){
+					return [ ];		  
+					},
+					notify: true,
+					reflectToAttribute: true,
+				},	
+							
+      };		  
+	}
+	
+	mostrarRoute() {
+	    alert("La ruta es: " +  this.route.path)
+		console.log(this.route);		
+		}
+		
+	mostrarData() {
+        console.log('Data:', this.data);
+        console.log('Tail:', this.tail);
+      }
+	 	 	 
+	 ready() {
+		super.ready();		
+		this.$.menu.addEventListener('iron-select', () => {		    
+			let tipo_seleccionado = event.detail['item'].value;
+			console.log('tipo_seleccionado:2: -->' + tipo_seleccionado); 
+				for (i in this.marcas) {
+				    console.log('Compara:['+ this.marcas[i].name + '] VS ['+ tipo_seleccionado + ']');
+					if( this.marcas[i].name == tipo_seleccionado ){
+						this.anio_inicio = document.querySelector("ce-marca-data").marcas[i].anio_inicio;
+						this.anio_fin    = document.querySelector("ce-marca-data").marcas[i].anio_fin;												
+						this.modelos     = document.querySelector("ce-marca-data").marcas[i].modelos;					    						
+						for (i in this.modelos) {
+							console.log('codigo: ' + this.modelos[i].codigo);
+			   		     }
+						//console.log('ANIO I:' +  this.anio_inicio);												
+						//console.log('ANIO F:' +  this.anio_fin);							
+				       }					 
+				}
+			
+			
+								
+	    })
+	 }
+	 					 
+  }  
+  customElements.define(CeMarcaData.is, CeMarcaData);
+  
+</script>
+  
+  <!-- </script>
+  
+  this.addEventListener('iron-select', function(event) {      		 			
+  let tipo_seleccionado = event.detail['item'].value;
+  console.log('tipo_seleccionado:2: ->' + tipo_seleccionado);   }   <script> -->
+  
+  
+    
+
+</dom-module>
+

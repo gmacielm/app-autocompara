@@ -1,0 +1,84 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+
+-->
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+  <link rel="import" href="../bower_components/iron-form/iron-form.html">
+
+  <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+  <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+  <link rel="import" href="../bower_components/paper-item/paper-item.html">
+  <link rel="import" href="../bower_components/paper-button/paper-button.html">  
+  
+  <link rel="import" href="../bower_components/neon-animation/web-animations.html">
+  <link rel="import" href="../bower_components/neon-animation/web-animations-.html">
+  <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+  <link rel="import" href="../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+
+<dom-module id="ce-modelos-data">
+	<template>
+	 <style>
+	  paper-dropdown-menu, paper-listbox {
+			width: 450px;
+		}
+  
+		paper-dropdown-menu {
+			height: 10px;
+			margin: auto;
+			display: block;
+		}
+	 </style>
+	 	 <paper-dropdown-menu id="modelos" selected-item="{{selectedItem}}" required label="Descripcion" name="modelos" horizontal-align="right" vertical-align="top">
+		 <paper-listbox class="dropdown-content" slot="dropdown-content">		   
+		   <dom-repeat items="{{modelos}}" as="modelo">
+			  <template>	   
+				<paper-item value="[[modelo.codigo]]">[[modelo.descripcion]]</paper-item>											
+			  </template>
+			</dom-repeat>
+		   </paper-listbox>		  
+	      </paper-dropdown-menu>
+		  <input is="iron-input" name="codigo_modelo" type="hidden" value$="[[selectedItem.value]]">
+		  
+	</template>
+	
+  <script> 
+
+    class CeModelosData extends Polymer.Element {
+
+      static get is() { return 'ce-modelos-data'; }
+	  	 
+      static get properties() { 
+	  return {	   
+        modelos: {
+          type: Array,
+          value(){ 
+				  return [];
+				  },
+		  notify: true,
+		  reflectToAttribute: true		  
+         },		 				
+       };	  
+	 }
+
+		ready() {
+		super.ready();		
+		this.$.modelos.addEventListener('iron-select', () => {		    
+			let tipo_seleccionado = event.detail['item'].value;
+			console.log('tipo_seleccionado:3: ->' + tipo_seleccionado); 
+			 })
+	 }
+	 
+	 		  	 	
+  } // de la clase
+  
+  customElements.define(CeModelosData.is, CeModelosData);
+  </script>
+
+</dom-module>

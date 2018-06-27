@@ -1,0 +1,172 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="ce-aseguras">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+	  
+	  .card {
+	    border-style: solid;
+		height: 580px;
+	  }
+	  .siniestra, .aseguradoras, .formulario, .centrale {
+	    border-style: solid;
+	  }
+	  
+	  .siniestra{
+	  float:left;
+	  width: 45%;	  
+	  }
+	  
+	  .centrale{
+	  width: 7%;
+	  float:left;
+	  border-style: solid;
+	  }
+	  
+	  .formulario{
+	  width: 48%;
+	  float:right;
+	  }
+	  	 	 
+      .banner{
+	    padding:8px 0px 0px 0px; 
+        background-color: #ffffff;  
+	    width: auto; 
+		border: 1px solid #999999; 			
+	    } 
+		
+		
+	   .marco {
+	     text-align: center;		 
+	    }
+		
+	   #banner1 {
+		 width: 98%;
+		 display: inline;
+		 vertical-align: center;		 
+		}
+		
+	   #linea-roja{
+	     background-color: #FF0000;
+		 height: 7px;
+		 width: auto;
+	   }
+	   
+	   #linea-gris{
+	     background-color: #F1EAE2;
+		 height: 25px;
+		 width: auto;
+	   }
+	   
+	   * {
+			box-sizing: border-box;
+		}
+	   	  	  	    						
+		img {
+			width: 50%;
+			vertical-align: center;
+		   }
+		
+		ul, li{
+			list-style:none;
+			margin: 0;
+			padding: 0;
+		 }
+		 
+		 /*Flex items*/
+		.list {
+		  display: flex;
+		  flex-wrap: wrap;
+		}
+		.list-item {
+		  display: flex; 
+		  padding: 0.5em;
+		  width: 70%;
+		}
+		
+		@media all and (min-width: 40em) {
+		  .list-item {
+		   width: 50%;
+		  }
+		}
+		@media all and (min-width: 60em) {
+		  .list-item {
+			width: 31%;
+			border: 1px solid blue; 
+		  }
+		}
+		.list-content {
+		  background-color: #fff;
+		  display: flex;
+		  flex-direction: column;
+		  padding: 1em;
+		  width: 100%;
+		  height: 80%;
+		  border: 1px solid red; 
+		  text-align: center;		 		  
+		}
+
+    </style>
+        	
+	  <ul class="list">
+	  <dom-repeat items="[[aseguradoras]]" as="aseguradora">
+           <template>              
+			    <li class="list-item">
+				 <div class="list-content">
+                  <img class="logos-aseguras" src="[[aseguradora.image]]" height="55" width="58%"/>
+				 </div>
+				</li>			
+              </shop-tab>
+            </template>
+        </dom-repeat>
+	   </ul>     
+	    
+  </template>
+
+  <script>
+    class CeAseguras extends Polymer.Element {
+	
+	static get is() { return 'ce-aseguras'; }
+	
+	static get properties () {	
+	  return {
+		aseguradoras: {
+		type: Array,
+		value() {
+		 return [
+			  { name: 'ABA', image: 'images/logo-aba.png', porcentaje:'.09'},
+			  { name: 'AIG', image: 'images/logo-aig.png', porcentaje:'.085'},
+			  { name: 'ATLAS', image: 'images/logo-atlas.png',porcentaje:'.070'},
+			  { name: 'AXA', image: 'images/logo-axa.png', porcentaje:'.078'},
+			  { name: 'GNP', image: 'images/logo-gnp.png', porcentaje:'.082'},
+			  { name: 'HDI', image: 'images/logo-hdi.png',porcentaje:'.08'},
+			  { name: 'INBURSA', image: 'images/logo-inbursa.png', porcentaje:'.075'},
+			  { name: 'MAPFRE', image: 'images/logo-mapfre.png',porcentaje:'.072'},
+			  { name: 'QUALITAS', image: 'images/logo-qualitas.png', porcentaje:'.10'},			  
+			  
+			];	      		  
+		  }
+	    } 	
+	  }	 
+	}
+
+}
+   
+    window.customElements.define(CeAseguras.is, CeAseguras);
+  </script>
+</dom-module>

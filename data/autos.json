@@ -1,0 +1,85 @@
+[
+   {
+    "name":"audi",
+    "title":"AUDI",
+    "category":"autos"
+   },   
+   {
+    "name":"chevrolet",
+    "title":"CHEVROLET",
+    "category":"autos",
+	"anio_inicio":"1996",
+	"anio_fin":"2018"
+   },   
+    {
+    "name":"honda", 
+	"title":"HONDA",
+    "category":"autos",
+	"anio_inicio":"1996",
+	"anio_fin":"2018",
+    "modelos":[
+		       {"codigo":"honda0101", "descripcion":"ACCORD EXL NAVI SEDAN AUT 3.5L V6 4PTAS"},
+			   {"codigo":"honda0102", "descripcion":"ACCORD EXL NAVI SEDAN CVT 2.4L 4CIL 4PTAS"},  
+			   {"codigo":"honda0105", "descripcion":"CITY EX CVT 1.5L 4CIL 4PTAS"},
+			   {"codigo":"honda0106", "descripcion":"CITY LX CVT 1.5L 4CIL 4PTAS"},
+			   {"codigo":"honda0108", "descripcion":"CIVIC COUPE AUT 1.5T 4CIL 2PTAS"},
+			   {"codigo":"honda0110", "descripcion":"CIVIC EX AUT L4 2.0 4PTAS"},
+			   {"codigo":"honda0113", "descripcion":"CR-V EX AUT 2.4L 4CIL 5PTAS"},
+			   {"codigo":"honda0114", "descripcion":"CR-V EXL NAVI CVT 2.4L 4CIL"},			   
+			   {"codigo":"honda0118", "descripcion":"FIT FUN STD 1.5L 4CIL"},
+			   {"codigo":"honda0119", "descripcion":"FIT FUN CVT 1.5L 4CIL"},			   
+			   {"codigo":"honda0121", "descripcion":"HR-V EPIC CVT 1.8L 4CIL"},
+			   {"codigo":"honda0122", "descripcion":"HR-V UNIQ CVT 1.8L 4CIL"},
+			   {"codigo":"honda0124", "descripcion":"ODYSSEY EX AUT 3.5L V6"},
+			   {"codigo":"honda0125", "descripcion":"ODYSSEY EXL AUT 3.5L V6"},
+			   {"codigo":"honda0126", "descripcion":"PILOT EX AUT 3.5L V6"},			   
+			   {"codigo":"honda0127", "descripcion":"PILOT TOURING AUT 3.5L V6"}
+			   ]	
+   },   
+    {
+    "name":"hyundai",
+    "title":"HYUNDAI",
+    "category":"autos",
+	"anio_inicio":"2012",
+	"anio_fin":"2018",	
+	"modelos":[
+		    {"codigo":"hyundai0101", "descripcion": "CRETA GLS AUT 1.L CIL"},
+			{"codigo":"hyundai0102", "descripcion": "CRETA GLS PREMIUM AUT 1.L CIL"},
+			{"codigo":"hyundai0103", "descripcion": "CRETA GLS STD 1.L CIL"},
+			{"codigo":"hyundai0104", "descripcion": "CRETA LIMITED AUT 1.L CIL"},
+			{"codigo":"hyundai0105", "descripcion": "ELANTRA GLS AUT 2.0L CIL PTAS"},
+			{"codigo":"hyundai0106", "descripcion": "ELANTRA GLS PREMIUM AUT 2.0L CIL PTAS"},
+			{"codigo":"hyundai0107", "descripcion": "ELANTRA GLS STD 2.0L CIL PTAS"},
+			{"codigo":"hyundai0108", "descripcion": "ELANTRA LIMITED TECH NAVI AUT 2.0L CIL PTAS"},
+			{"codigo":"hyundai0109", "descripcion": "GRAND I10 GL AUT  1.2L CIL PTAS"},
+			{"codigo":"hyundai0110", "descripcion": "GRAND I10 GL AUT  1.2L CIL PTAS"},
+			{"codigo":"hyundai0111", "descripcion": "GRAND I10 GL MID AUT  1.2L CIL PTAS"},
+			{"codigo":"hyundai0112", "descripcion": "GRAND I10 GL MID AUT 1.2L CIL PTAS"},
+			{"codigo":"hyundai0113", "descripcion": "GRAND I10 GL MID STD 1.2L CIL PTAS"},
+			{"codigo":"hyundai0114", "descripcion": "GRAND I10 GL MID STD 1.2L CIL PTAS"},
+			{"codigo":"hyundai0115", "descripcion": "GRAND I10 GL STD  1.2L CIL PTAS"},
+			{"codigo":"hyundai0116", "descripcion": "GRAND I10 GL STD 1.2L CIL PTAS"},
+			{"codigo":"hyundai0117", "descripcion": "GRAND I10 GLS AUT 1.2L CIL PTAS"},
+			{"codigo":"hyundai0118", "descripcion": "GRAND I10 GLS AUT 1.2L CIL PTAS"},
+			{"codigo":"hyundai0119", "descripcion": "GRAND I10 GLS STD 1.2L CIL PTAS"},
+			{"codigo":"hyundai0120", "descripcion": "GRAND I10 SEDAN GLS STD 1.2L CIL PTAS"},
+			{"codigo":"hyundai0121", "descripcion": "SANTA FE SPORT AUT 2.0T CIL"},
+			{"codigo":"hyundai0122", "descripcion": "SONATA GLS AUT 2.L CIL PTAS"},
+			{"codigo":"hyundai0123", "descripcion": "SONATA LTD NAVI AUT 2.L CIL PTAS"},
+			{"codigo":"hyundai0124", "descripcion": "SONATA PREMIUM AUT 2.L CIL PTAS"},
+			{"codigo":"hyundai0125", "descripcion": "SONATA SPORT AUT 2.0T CIL PTAS"},
+			{"codigo":"hyundai0126", "descripcion": "TUCSON GLS AUT 2.0L CIL"},
+			{"codigo":"hyundai0127", "descripcion": "TUCSON GLS PREMIUM AUT 2.0L CIL"},
+			{"codigo":"hyundai0128", "descripcion": "TUCSON LIMITED AUT 2.0L CIL"},
+			{"codigo":"hyundai0129", "descripcion": "TUCSON LIMITED TECH AUT 2.0L CIL"},
+			{"codigo":"hyundai0130", "descripcion": "TUCSON LIMITED TECH NAVI AUT 2.0L CIL"}
+		  ]
+    },   
+    {
+    "name":"vw",
+    "title":"VOLKSWAGEN",
+    "category":"autos",
+	"anio_inicio":"1976",
+	"anio_fin":"2018"
+   }
+ ]

@@ -1,0 +1,97 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+  <link rel="import" href="../bower_components/iron-form/iron-form.html">
+
+  <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+  <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+  <link rel="import" href="../bower_components/paper-item/paper-item.html">
+  <link rel="import" href="../bower_components/paper-button/paper-button.html">  
+  
+  <link rel="import" href="../bower_components/neon-animation/web-animations.html">
+  <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="ce-anios-data">
+	<template>	   
+        <!-- <p>inicios: {{anio_inicio}}</p> 	
+		<p>fins   : {{anio_fin}}</p> -->
+	 	 <paper-dropdown-menu required label="{{etiqueta}}" name="anios">
+		 <paper-listbox class="dropdown-content" slot="dropdown-content" selected="{{selected}}">		   
+		   <dom-repeat items="{{anios}}" as="anio">
+			  <template>	   
+				<paper-item value="[[anio]]">[[anio]]</paper-item>							
+			  </template>
+			</dom-repeat>
+		   </paper-listbox>		  
+	      </paper-dropdown-menu>
+	</template>
+	
+  <script> 
+
+    class CeAniosData extends Polymer.Element {
+
+      static get is() { return 'ce-anios-data'; }
+	  	 
+      static get properties() { 
+	  return {
+	    selected:{
+			type: Number,
+			value: 0,
+			notify: true,
+			reflectToAttribute: true
+		},		
+
+	    anio_inicio:{
+			type: Number,
+			value: 1995,
+			notify: true,
+			reflectToAttribute: true
+		},		
+		anio_fin:{
+			type: Number,
+			value: 2017,
+			notify: true,
+			reflectToAttribute: true		
+		},		
+        anios: {
+          type: Array,
+          computed: 'generaRango(anio_inicio, anio_fin)',
+		  notify: true,
+		  reflectToAttribute: true		  
+         },
+		 etiqueta: {
+		   type: String,
+		   value: 'Modelos',
+		   notify: true,
+		  reflectToAttribute: true
+		 }
+       };	  
+	 }
+	 
+	 generaRango(anio_inicio, anio_fin){	
+
+			this.selected = 0;
+			var arreglo=new Array();
+				
+			for (var i=anio_inicio; i < anio_fin; i++) { 												
+				  arreglo.push(i);					  
+				 }
+				 
+		    return arreglo.reverse();		
+	 }	 	
+	 		  	 	
+  } // de la clase
+  
+  customElements.define(CeAniosData.is, CeAniosData);
+  </script>
+
+</dom-module>

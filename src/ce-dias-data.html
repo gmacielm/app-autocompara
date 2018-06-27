@@ -1,0 +1,99 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+  <link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+  <link rel="import" href="../bower_components/iron-form/iron-form.html">
+  <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+  <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+  <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+  <link rel="import" href="../bower_components/paper-item/paper-item.html">
+  <link rel="import" href="../bower_components/paper-button/paper-button.html">  
+  
+  <link rel="import" href="../bower_components/neon-animation/web-animations.html">
+
+
+<dom-module id="ce-dias-data">
+	<template>	   
+        <!-- <p>inicios: {{anio_inicio}}</p> 	
+		<p>fins   : {{anio_fin}}</p> -->
+	 	 <paper-dropdown-menu required label="Dia" name="dias">
+		 <paper-listbox class="dropdown-content" slot="dropdown-content" selected="{{selected}}">		   
+		   <dom-repeat items="{{dias}}" as="dia">
+			  <template>	   
+				<paper-item value="[[dia]]">[[dia]]</paper-item>							
+			  </template>
+			</dom-repeat>
+		   </paper-listbox>		  
+	      </paper-dropdown-menu>
+	</template>
+	
+  <script> 
+
+    class CeDiasData extends Polymer.Element {
+
+      static get is() { return 'ce-dias-data'; }
+	  	 
+      static get properties() { 
+	  return {
+	    selected:{
+			type: Number,
+			value: 0,
+			notify: true,
+			reflectToAttribute: true
+		},		
+
+	    dia_inicio:{
+			type: Number,
+			value: 1,
+			notify: true,
+			reflectToAttribute: true
+		},		
+		dia_fin:{
+			type: Number,
+			value: 31,
+			notify: true,
+			reflectToAttribute: true		
+		},		
+        dias: {
+          type: Array,
+          computed: 'generaRango(dia_inicio, dia_fin)',
+		  notify: true,
+		  reflectToAttribute: true		  
+         },	
+	     orden: {
+		   type: Boolean,
+		   value: true		   
+		  }
+       };	  
+	 }
+	 
+	 generaRango(dia_inicio, dia_fin){	
+
+			this.selected = 0;
+			var arreglo=new Array();
+				
+			for (var i=dia_inicio; i <= dia_fin; i++) { 												
+				  arreglo.push(i);					  
+				 }
+			
+    		if(!this.orden){	 
+				return arreglo.reverse();		
+			}
+			else  return arreglo;
+	 }	 	
+	 		  	 	
+  } // de la clase
+  
+  customElements.define(CeDiasData.is, CeDiasData);
+  </script>
+
+</dom-module>

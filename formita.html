@@ -1,0 +1,130 @@
+<html>
+  <link rel="import" href="../bower_components/polymer/polymer-element.html">
+  
+  <link rel="import" href="../bower_components/neon-animation/web-animations.html">
+  <link rel="import" href="../bower_components/neon-animation/animations/scale-up-animation.html">
+  <link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
+  
+  <link rel="import" href="../bower_components/iron-form/iron-form.html">
+  <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+  <link rel="import" href="../bower_components/iron-icons/communication-icons.html">
+  <link rel="import" href="../bower_components/iron-input/iron-input.html">
+  <link rel="import" href="../bower_components/iron-checked-element-behavior/iron-checked-element-behavior.html">
+  <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+  <link rel="import" href="../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
+  <link rel="import" href="../bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">
+  <link rel="import" href="../bower_components/iron-selector/iron-selectable.html">
+  <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+
+  
+  <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+  <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+  <link rel="import" href="../bower_components/paper-item/paper-item.html">
+  <link rel="import" href="../bower_components/paper-button/paper-button.html">  
+  <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">  
+  <link rel="import" href="../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+  <link rel="import" href="../bower_components/paper-styles/paper-styles.html">
+  <link rel="import" href="../bower_components/paper-radio-button/paper-radio-button.html">
+  <link rel="import" href="../bower_components/paper-ripple/paper-ripple.html">
+  <link rel="import" href="../bower_components/paper-behaviors/paper-checked-element-behavior.html">
+  
+  <link rel="import" href="/src/ce-cotizacion.html">
+<body onLoad="getGET()">
+<!-- This form is only used to display the elements -->
+<!--<form is="iron-form" id="redirectDemo">
+  <paper-input name="name" label="Name" required></paper-input>
+  <paper-input name="password" label="Password" type="password" required></paper-input>
+  <paper-checkbox name="read" required>You must check this box</paper-checkbox><br>
+  <paper-button raised onclick="_nativeSubmit(event)">Submit</paper-button>
+</form> -->
+
+<!-- This form is used to submit the elements. This is where you would
+  set your method, action, etc. -->
+<!-- <form method="get" action="redirect" id="nativeForm"></form> -->
+
+<ce-cotizacion
+	codigo-modelo="{{codigo-modelo}}"	
+	modelo="{{modelo}}"
+	anio="{{anio}}"
+	precio="{{precio}}">
+</ce-cotizacion>
+
+<script>
+
+		
+function getGET(){   
+   var loc = document.location.href;
+   var getString = loc.split('?')[1];
+   var GET = getString.split('&');
+   var get = {};//this object will be filled with the key-value pairs and returned.
+     
+   for(var i = 0, l = GET.length; i < l; i++){
+		var tmp = GET[i].split('=');
+		//console.log('parametro:'+unescape(decodeURI(tmp[0]))+ '[' + unescape(decodeURI(tmp[1]))+']');	  	 
+		get[tmp[0]] = unescape(decodeURI(tmp[1]));
+		if(unescape(decodeURI(tmp[0])) == 'codigo_modelo') {			
+			document.querySelector("ce-cotizacion").codigo_modelo= unescape(decodeURI(tmp[1]));						
+	   }
+	   if(unescape(decodeURI(tmp[0])) == 'modelos') {		
+             var vj_modelo = unescape(decodeURI(tmp[1]));  			 
+			 document.querySelector("ce-cotizacion").modelo = vj_modelo.replace(/\+/g, " ");
+	   }
+   }   
+
+   let xhr = new XMLHttpRequest();    
+   xhr.onreadystatechange = function(){   
+		//console.log('El estado1:' + this.readyState);     //console.log('El estado2:' + this.status);
+		if (this.readyState == 4 && this.status == 200) {
+		
+			let obj_anio_valor = JSON.parse(this.responseText);
+						
+			for (i in obj_anio_valor) {    
+				 for (j in obj_anio_valor[i].anios) {								
+						if(obj_anio_valor[i].codigo_modelo === document.querySelector("ce-cotizacion").codigo_modelo) {															
+							document.querySelector("ce-cotizacion").anio= obj_anio_valor[i].anios[j].anio;
+							document.querySelector("ce-cotizacion").precio= obj_anio_valor[i].anios[j].precio;
+							//console.log('Codigo ->' + obj_anio_valor[i].codigo_modelo);  //console.log('obj_anio_valor['+i+'].anios.anio  ->' + obj_anio_valor[i].anios[j].anio);	//console.log('obj_anio_valor['+i+'].anios.valor ->' + obj_anio_valor[i].anios[j].precio);				
+						   }	
+					}
+    
+				}
+					   
+           };	
+      }	 
+					
+   xhr.open('GET', 'data/anio_valor.json',true);
+   xhr.send();	
+   //---------------------------------------------------------------------------------------
+   let xhr2 = new XMLHttpRequest();    
+   xhr2.onreadystatechange = function(){   		
+		if (this.readyState == 4 && this.status == 200) {
+		
+			let obj_tarifas = JSON.parse(this.responseText);
+			document.querySelector("ce-cotizacion").tarifas= obj_tarifas;													   
+		};	
+    }	 
+					
+   xhr2.open('GET', 'data/aseguradoras_tarifas.json',true);
+   xhr2.send();	
+   
+   
+   return get;
+}		
+		
+  function _nativeSubmit(event) {
+   var string1 ="";
+   var geta = getGET();
+   var codigo ="";
+	for (var property in geta) {
+	    console.log(property+ ':' +geta[property]);		
+		if(property==='codigo_modelo') {
+			document.querySelector("ce-cotizacion").codigo_modelo= geta[property]; 	
+		 }
+      }
+	
+      
+  }
+</script>
+
+</body>
+</html>
